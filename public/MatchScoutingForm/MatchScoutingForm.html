@@ -1,0 +1,425 @@
+<html>
+
+    <head>
+
+        <title>2614 Scouting Form</title>
+        <meta charset="utf-8">
+
+        <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+        <script src='initializeFirebase.js'></script>
+
+        <!-- Bootstrap -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css' integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ' crossorigin='anonymous'>
+        <script src='https://code.jquery.com/jquery-3.1.1.slim.min.js' integrity='sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n' crossorigin='anonymous'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js' integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb' crossorigin='anonymous'></script>
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js' integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn' crossorigin='anonymous'></script>
+
+        <!-- Files -->
+        <script src="MatchScoutingForm.js"></script>
+        <link rel='stylesheet' type='text/css' href='MatchScoutingForm.css' />
+
+    </head>
+
+    <body>
+
+        <a href="https://mars2614-scouting-2018.firebaseapp.com/" target="_blank">
+            <h1>MARS Scouting</h1>
+        </a>
+
+        <br>
+        <h2>Pre-Match</h2>
+        <div class="container-fluid" id="preMatch">
+
+            <div class='row'>
+
+                <div class='col-sm-6'>
+                    Scout Name
+                    <input type='text' class='form-control' name='scoutName' id='scoutName' placeholder='Scout Name' />
+                </div>
+
+                <div class='col-sm-3'>
+                    Scout Team
+                    <input type='text' pattern="\d*" class='form-control' name='scoutTeam' id='scoutTeam' placeholder='2614' min='1' max='10000' />
+                </div>
+
+                <div class='col-sm-3'>
+                    Competition
+                    <select class='form-control' name='competition' id='competition' onchange='inputOtherCompetition(this.options[this.selectedIndex].value)'>
+                        <option> Select Competition </option>
+                        <option selected value='Smoky'>Smoky</option>
+                        <option value='Buckeye'>Buckeye</option>
+                        <option value='Palmetto'>Palmetto</option>
+                        <option value='Detroit'>Detroit</option>
+                        <option value='Other'>Other</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div id='otherCompetitionInput'></div>
+
+            <div class='row'>
+
+                <div class='col-sm-6'>
+
+                    Alliance
+                    <div class='btn-group w-100' data-toggle='buttons'>
+                        <label class='btn btn-outline-danger w-50'>
+                            <input type='radio' name='alliance' id='redAlliance' value='red'>Red Alliance
+                        </label>
+
+                        <label class='btn btn-outline-primary w-50'>
+                            <input type='radio' name='alliance' id='blueAlliance' value='blue'>Blue Alliance
+                        </label>
+                    </div>
+
+
+                </div>
+
+                <div class='col-sm-3'>
+                    Match Number
+                    <input type='text' pattern="\d*" class='form-control' name='matchNumber' id='matchNumber' placeholder='0' min='0' max='200' />
+                </div>
+
+                <div class='col-sm-3'>
+                    Team Number
+                    <input list="teams" pattern="\d*" class='form-control' name='teamNumber' id='teamNumber' placeholder='0' min='0' max='9999'/>
+                    <datalist id="teams">
+                        <option value=108>
+                        <option value=144>
+                        <option value=283>
+                        <option value=343>
+                        <option value=538>
+                        <option value=744>
+                        <option value=1038>
+                        <option value=1293>
+                        <option value=1466>
+                        <option value=2190>
+                        <option value=2393>
+                        <option value=2614>
+                        <option value=2638>
+                        <option value=2856>
+                        <option value=2973>
+                        <option value=3000>
+                        <option value=3140>
+                        <option value=3201>
+                        <option value=3489>
+                        <option value=3490>
+                        <option value=3821>
+                        <option value=3824>
+                        <option value=3959>
+                        <option value=3966>
+                        <option value=3984>
+                        <option value=4013>
+                        <option value=4083>
+                        <option value=4264>
+                        <option value=4265>
+                        <option value=4284>
+                        <option value=4306>
+                        <option value=4462>
+                        <option value=4504>
+                        <option value=4576>
+                        <option value=4630>
+                        <option value=4764>
+                        <option value=5002>
+                        <option value=5005>
+                        <option value=5022>
+                        <option value=5186>
+                        <option value=5492>
+                        <option value=5508>
+                        <option value=5744>
+                        <option value=6157>
+                        <option value=6219>
+                        <option value=6302>
+                        <option value=6517>
+                        <option value=6654>
+                        <option value=6846>
+                        <option value=6858>
+                        <option value=6928> 
+                    </datalist>
+                </div>
+
+            </div>
+
+        </div>
+
+        <br>
+        <h2>Autonomous</h2>
+        <div class="container-fluid row" id="autonomous">
+
+            <br>
+            <div class="col-md-5">
+
+                <img class="startingPositionsImg" src="startingPositions.jpg">
+
+            </div>
+
+            <div class="col-md-7">
+
+                Start Location
+                <div class="row">
+
+                    <div class="btn-group col-sm-12" data-toggle="buttons">
+
+                        <label class="btn btn-outline-success w-25">
+                            <input type="radio" id="position1" name="startLocation" value="1"> 1
+                        </label>
+
+
+                        <label class="btn btn-outline-success w-25">
+                            <input type="radio" id="position2" name="startLocation" value="2"> 2
+                        </label>
+
+
+                        <label class="btn btn-outline-success w-25">
+                            <input type="radio" id="position3" name="startLocation" value="3"> 3
+                        </label>
+
+
+                        <label class="btn btn-outline-success w-25">
+                            <input type="radio" id="position4" name="startLocation" value="4"> 4
+                        </label>
+
+                        <label class="btn btn-outline-success w-25">
+                            <input type="radio" id="position5" name="startLocation" value="5"> 5
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="btn-group col-sm-12" data-toggle="buttons">
+
+                        <label class="btn btn-outline-secondary w-50">
+                            <input type="radio" name="autoRun"id="noAutoRun" value="false">No Auto-Run
+                        </label>
+                        
+                        <label class="btn btn-outline-secondary w-50">
+                            <input type="radio" name="autoRun"id="autoRun" value="true">Auto-Run
+                        </label>
+                    </div>
+
+                </div>
+
+                <br>
+                <!-- Row of Auto Cubes Switch-->
+                <div class='row'>
+
+                    <div class="btn-group-vertical col-sm-4">
+                        Cubes Scored on Switch
+                        <button type="button" onclick="increment(1,'autoCubesScoreSwitch')" class="btn btn-primary">+</button>
+                        <input type="number" id="autoCubesScoreSwitch" placeholder="0" min="0" class="btn btn-default">
+                        <button type="button" onclick="increment(-1,'autoCubesScoreSwitch')" class="btn btn-primary">-</button>
+                    </div>
+
+                    <div class="btn-group-vertical col-sm-4">
+                        Cubes Missed on Switch
+                        <button type="button" onclick="increment(1,'autoCubesMissSwitch')" class="btn btn-primary">+</button>
+                        <input type="number" id="autoCubesMissSwitch" placeholder="0" min="0" class="btn btn-default">
+                        <button type="button" onclick="increment(-1,'autoCubesMissSwitch')" class="btn btn-primary">-</button>
+                    </div>
+
+                    <div class="btn-group-vertical col-sm-4">
+                        Cubes Unscored on Switch
+                        <button type="button" onclick="increment(1,'autoCubesUnscoreSwitch')" class="btn btn-primary">+</button>
+                        <input type="number" id="autoCubesUnscoreSwitch" placeholder="0" min="0" class="btn btn-default">
+                        <button type="button" onclick="increment(-1,'autoCubesUnscoreSwitch')" class="btn btn-primary">-</button>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="btn-group-vertical col-sm-4">
+                        Cubes Scored on Scale
+                        <button type="button" onclick="increment(1,'autoCubesScoreScale')" class="btn btn-warning">+</button>
+                        <input type="number" id="autoCubesScoreScale" placeholder="0" min="0" class="btn btn-default">
+                        <button type="button" onclick="increment(-1,'autoCubesScoreScale')" class="btn btn-warning">-</button>
+                    </div>
+
+                    <div class="btn-group-vertical col-sm-4">
+                        Cubes Missed on Scale
+                        <button type="button" onclick="increment(1,'autoCubesMissScale')" class="btn btn-warning">+</button>
+                        <input type="number" id="autoCubesMissScale" placeholder="0" min="0" class="btn btn-default">
+                        <button type="button" onclick="increment(-1,'autoCubesMissScale')" class="btn btn-warning">-</button>
+                    </div>
+
+                    <div class="btn-group-vertical col-sm-4">
+                        Cubes Unscored on Scale
+                        <button type="button" onclick="increment(1,'autoCubesUnscoreScale')" class="btn btn-warning">+</button>
+                        <input type="number" id="autoCubesUnscoreScale" placeholder="0" min="0" class="btn btn-default">
+                        <button type="button" onclick="increment(-1,'autoCubesUnscoreScale')" class="btn btn-warning">-</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="btn-group-vertical col-sm-12">
+                        Cubes Exchanged
+                        <button type="button" onclick="increment(1,'autoCubesExchanged')" class="btn btn-info">+</button>
+                        <input type="number" id="autoCubesExchanged" placeholder="0" min="0" class="btn btn-default">
+                        <button type="button" onclick="increment(-1,'autoCubesExchanged')" class="btn btn-info">-</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <br>
+        <h2>Teleop</h2>
+        <div class="container-fluid" id="teleop">
+
+            <div class="row">
+
+                <div class="btn-group-vertical col-sm-4">
+                    Cubes Scored on Switch
+                    <button type="button" onclick="increment(1,'teleopCubesScoreSwitch')" class="btn btn-primary">+</button>
+                    <input type="number" id="teleopCubesScoreSwitch" placeholder="0" min="0" class="btn btn-default">
+                    <button type="button" onclick="increment(-1,'teleopCubesScoreSwitch')" class="btn btn-primary">-</button>
+                </div>
+
+                <div class="btn-group-vertical col-sm-4">
+                    Cubes Scored on Scale
+                    <button type="button" onclick="increment(1,'teleopCubesScoreScale')" class="btn btn-warning">+</button>
+                    <input type="number" id="teleopCubesScoreScale" placeholder="0" min="0" class="btn btn-default">
+                    <button type="button" onclick="increment(-1,'teleopCubesScoreScale')" class="btn btn-warning">-</button>
+                </div>
+
+                <div class="btn-group-vertical col-sm-4">
+                    Cubes "Scored" on Opponent Switch
+                    <button type="button" onclick="increment(1,'teleopCubesScoreOpponentSwitch')" class="btn btn-success">+</button>
+                    <input type="number" id="teleopCubesScoreOpponentSwitch" placeholder="0" min="0" class="btn btn-default">
+                    <button type="button" onclick="increment(-1,'teleopCubesScoreOpponentSwitch')" class="btn btn-success">-</button>
+                </div>
+
+            </div>
+
+            <br>
+            <div class="row">
+
+                <div class="btn-group-vertical col-sm-6">
+                    Cubes Missed / Lost
+                    <button type="button" onclick="increment(1,'teleopCubesMissed')" class="btn btn-danger">+</button>
+                    <input type="number" id="teleopCubesMissed" placeholder="0" min="0" class="btn btn-default">
+                    <button type="button" onclick="increment(-1,'teleopCubesMissed')" class="btn btn-danger">-</button>
+                </div>
+
+                <div class="btn-group-vertical col-sm-6">
+                    Cubes Exchanged
+                    <button type="button" onclick="increment(1,'teleopCubesExchanged')" class="btn btn-info">+</button>
+                    <input type="number" id="teleopCubesExchanged" placeholder="0" min="0" class="btn btn-default">
+                    <button type="button" onclick="increment(-1,'teleopCubesExchanged')" class="btn btn-info">-</button>
+                </div>
+
+            </div>
+
+            <br>
+            <div class="row">
+
+                <div class="btn-group col-sm-12" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary btn-block">
+                        <input type="checkbox" id="playedDefense">Played Defense
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+
+        <br>
+        <h2>End Game</h2>
+        <div class="container-fluid" id="endGame">
+
+            <div class="row">
+
+                <div class="btn-group col-sm-12" data-toggle="buttons">
+
+                    <label class="w-25 btn btn-outline-success">
+                        <input type="radio" name="robotEndPosition" id="climbed" autocomplete="off" value="climbed">Climb
+                    </label>
+
+                    <label class="w-25 btn btn-outline-danger">
+                        <input type="radio" name="robotEndPosition" id="failedClimb" autocomplete="off" value="failedClimb">C Fail
+                    </label>
+
+                    <label class="w-25 btn btn-outline-primary">
+                        <input type="radio" name="robotEndPosition" id="parked" autocomplete="off" value="parked">Park
+                    </label>
+
+                    <label class="w-25 btn btn-outline-warning">
+                        <input type="radio" name="robotEndPosition" id="noAttempt" autocomplete="off" value="noAttempt"> N/A
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-6 btn-group" data-toggle="buttons">
+                    <label class="w-100 btn btn-outline-secondary">
+                        <input type="checkbox" name="robotEndPosition" id="helpedOthersClimb" autocomplete="off"s> Attempted Climb Assist
+                    </label>
+                </div>
+
+                <div class="col-sm-6 btn-group" data-toggle="buttons">
+                    <span class="w-50 input-group-addon">Climb Assists</span>
+                    <button type="button" onclick="increment(1,'assistedClimbs')" class="btn btn-info w-25">+</button>
+                    <input type="number" name="robotEndPosition" id="assistedClimbs" value="0" max="2" min="0" class="w-50 btn">
+                    <button type="button" onclick="increment(-1,'assistedClimbs')" class="btn btn-info w-25">-</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <br>
+        <h2>Post-Match</h2>
+        <div class="container-fluid" id="other">
+
+            <div class="row">
+
+                <div class="col-sm-12 btn-group" data-toggle="buttons">
+                    <label class="w-100 btn btn-outline-secondary">
+                        <input type="checkbox" id="everInactive">Inactivity
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class='col-sm-12'>
+
+                    Comments
+                    <div class="form-group">
+                        <textarea class="form-control" rows='7' cols='50' id='comments' placeholder='Optional Comments'></textarea>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <br> <!-- Submit Button -->
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <button class="btn btn-danger btn-block" onclick='writeNewPost()'>Submit</button>
+                </div>
+
+            </div>
+
+            <br>
+
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,20 @@
+body {
+    background-color: black;
+    font-size: 1em;
+    color: white;
+}
+
+.marsLogo {
+    width: auto;
+    height: 8em;
+    visibility: visible;
+
+}
+
+.powerUpLogo {
+    width: auto;
+    height: 8em;
+    visibility: visible;
+    position: absolute;
+    right: 0px;
+}
